@@ -655,7 +655,11 @@ func (rc *RongCloud) PrivateSend(senderID string, targetID []string, objectName 
 	for _, v := range targetID {
 		req.Param("toUserId", v)
 	}
-	req.Param("objectName", objectName)
+	if objectName == "RC:IWNormalMsg" {
+		req.Param("classname", objectName)
+	} else {
+		req.Param("objectName", objectName)
+	}
 
 	msgr, err := msg.ToString()
 	if err != nil {
